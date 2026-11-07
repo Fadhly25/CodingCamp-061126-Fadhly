@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="id" data-theme="light">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Life Dashboard</title>
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+
+  <!-- ==============================
+       HEADER: Greeting + Jam + Tanggal
+  =============================== -->
+  <header class="header">
+    <div class="header-left">
+      <!-- Greeting otomatis berdasarkan waktu -->
+      <h1 id="greeting">Selamat Pagi</h1>
+
+      <!-- Nama pengguna: bisa dikustomisasi -->
+      <div class="name-wrapper">
+        <span id="display-name" class="display-name">Pengguna</span>
+        <button id="btn-edit-name" class="btn-icon" title="Ubah nama">✏️</button>
+      </div>
+
+      <!-- Form ubah nama (tersembunyi secara default) -->
+      <div id="name-form" class="name-form hidden">
+        <input
+          type="text"
+          id="input-name"
+          placeholder="Masukkan namamu..."
+          maxlength="30"
+        />
+        <button id="btn-save-name" class="btn-primary">Simpan</button>
+        <button id="btn-cancel-name" class="btn-secondary">Batal</button>
+      </div>
+    </div>
+
+    <div class="header-right">
+      <!-- Jam digital -->
+      <div id="clock" class="clock">00:00:00</div>
+      <!-- Tanggal -->
+      <div id="date-display" class="date-display">Memuat tanggal...</div>
+      <!-- Tombol toggle tema -->
+      <button id="btn-theme" class="btn-theme" title="Ganti tema">🌙</button>
+    </div>
+  </header>
+
+  <!-- ==============================
+       MAIN CONTENT
+  =============================== -->
+  <main class="main-grid">
+
+    <!-- ---- FOCUS TIMER ---- -->
+    <section class="card" id="section-timer">
+      <h2 class="card-title">⏱️ Focus Timer</h2>
+      <div class="timer-display" id="timer-display">25:00</div>
+      <div class="timer-controls">
+        <button id="btn-start" class="btn-primary">Mulai</button>
+        <button id="btn-pause" class="btn-secondary" disabled>Jeda</button>
+        <button id="btn-reset" class="btn-secondary">Reset</button>
+      </div>
+      <p class="timer-hint">Fokus selama 25 menit, lalu istirahat sejenak.</p>
+    </section>
+
+    <!-- ---- TO-DO LIST ---- -->
+    <section class="card" id="section-todo">
+      <h2 class="card-title">📝 To-Do List</h2>
+
+      <!-- Form tambah tugas -->
+      <div class="todo-form">
+        <input
+          type="text"
+          id="input-todo"
+          placeholder="Tambah tugas baru..."
+          maxlength="100"
+        />
+        <button id="btn-add-todo" class="btn-primary">Tambah</button>
+      </div>
+
+      <!-- Pesan error duplikat -->
+      <p id="todo-error" class="error-msg hidden"></p>
+
+      <!-- Filter tugas -->
+      <div class="todo-filters">
+        <button class="filter-btn active" data-filter="all">Semua</button>
+        <button class="filter-btn" data-filter="active">Aktif</button>
+        <button class="filter-btn" data-filter="done">Selesai</button>
+      </div>
+
+      <!-- Daftar tugas -->
+      <ul id="todo-list" class="todo-list">
+        <!-- Item diisi oleh JavaScript -->
+      </ul>
+
+      <!-- Info jumlah tugas -->
+      <p id="todo-count" class="todo-count">0 tugas tersisa</p>
+    </section>
+
+    <!-- ---- QUICK LINKS ---- -->
+    <section class="card" id="section-links">
+      <h2 class="card-title">🔗 Quick Links</h2>
+
+      <!-- Form tambah link -->
+      <div class="link-form">
+        <input
+          type="text"
+          id="input-link-name"
+          placeholder="Nama link..."
+          maxlength="30"
+        />
+        <input
+          type="url"
+          id="input-link-url"
+          placeholder="https://..."
+          maxlength="200"
+        />
+        <button id="btn-add-link" class="btn-primary">Tambah</button>
+      </div>
+
+      <!-- Pesan error link -->
+      <p id="link-error" class="error-msg hidden"></p>
+
+      <!-- Grid kartu link -->
+      <div id="links-grid" class="links-grid">
+        <!-- Item diisi oleh JavaScript -->
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <p>Life Dashboard &copy; 2026 — Dibuat dengan ❤️ untuk RevoU Mini Project</p>
+  </footer>
+
+  <script src="js/app.js"></script>
+</body>
+</html>

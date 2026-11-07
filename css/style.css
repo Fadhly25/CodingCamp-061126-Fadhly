@@ -1,0 +1,616 @@
+/* =============================================
+   CSS VARIABLES — Light & Dark Theme
+   ============================================= */
+:root {
+  /* Warna utama Light Mode */
+  --bg-page:        #f0f2f5;
+  --bg-card:        #ffffff;
+  --bg-header:      #ffffff;
+  --text-primary:   #1a1a2e;
+  --text-secondary: #555770;
+  --text-muted:     #9b9fb5;
+  --accent:         #4f46e5;       /* ungu indigo */
+  --accent-hover:   #4338ca;
+  --accent-light:   #eef2ff;
+  --danger:         #ef4444;
+  --danger-hover:   #dc2626;
+  --success:        #22c55e;
+  --border:         #e2e8f0;
+  --shadow:         0 2px 12px rgba(0, 0, 0, 0.08);
+  --shadow-hover:   0 4px 20px rgba(0, 0, 0, 0.14);
+  --timer-bg:       #eef2ff;
+  --done-text:      #9b9fb5;
+  --filter-active:  var(--accent);
+  --input-bg:       #f8fafc;
+  --transition:     0.25s ease;
+}
+
+/* Dark Mode — aktif saat html[data-theme="dark"] */
+[data-theme="dark"] {
+  --bg-page:        #0f0f1a;
+  --bg-card:        #1a1a2e;
+  --bg-header:      #12122a;
+  --text-primary:   #e8e8f0;
+  --text-secondary: #a0a0c0;
+  --text-muted:     #5a5a7a;
+  --accent:         #818cf8;
+  --accent-hover:   #6366f1;
+  --accent-light:   #1e1b4b;
+  --danger:         #f87171;
+  --danger-hover:   #ef4444;
+  --success:        #4ade80;
+  --border:         #2d2d4a;
+  --shadow:         0 2px 12px rgba(0, 0, 0, 0.4);
+  --shadow-hover:   0 4px 20px rgba(0, 0, 0, 0.6);
+  --timer-bg:       #1e1b4b;
+  --done-text:      #5a5a7a;
+  --input-bg:       #12122a;
+}
+
+/* =============================================
+   RESET & BASE
+   ============================================= */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+  background-color: var(--bg-page);
+  color: var(--text-primary);
+  min-height: 100vh;
+  transition: background-color var(--transition), color var(--transition);
+  display: flex;
+  flex-direction: column;
+}
+
+/* =============================================
+   UTILITY
+   ============================================= */
+.hidden {
+  display: none !important;
+}
+
+.error-msg {
+  color: var(--danger);
+  font-size: 0.82rem;
+  margin-top: 6px;
+  padding: 6px 10px;
+  background: rgba(239, 68, 68, 0.1);
+  border-radius: 6px;
+  border-left: 3px solid var(--danger);
+}
+
+/* =============================================
+   TOMBOL
+   ============================================= */
+button {
+  cursor: pointer;
+  font-family: inherit;
+  border: none;
+  border-radius: 8px;
+  font-size: 0.9rem;
+  transition: background-color var(--transition), transform 0.1s, opacity var(--transition);
+}
+
+button:active {
+  transform: scale(0.97);
+}
+
+button:disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+}
+
+.btn-primary {
+  background-color: var(--accent);
+  color: #fff;
+  padding: 8px 18px;
+}
+
+.btn-primary:hover:not(:disabled) {
+  background-color: var(--accent-hover);
+}
+
+.btn-secondary {
+  background-color: var(--border);
+  color: var(--text-primary);
+  padding: 8px 18px;
+}
+
+.btn-secondary:hover:not(:disabled) {
+  background-color: var(--text-muted);
+  color: #fff;
+}
+
+.btn-icon {
+  background: transparent;
+  color: var(--text-muted);
+  font-size: 1rem;
+  padding: 4px 6px;
+  border-radius: 6px;
+}
+
+.btn-icon:hover {
+  background: var(--accent-light);
+  color: var(--accent);
+}
+
+/* =============================================
+   HEADER
+   ============================================= */
+.header {
+  background-color: var(--bg-header);
+  border-bottom: 1px solid var(--border);
+  box-shadow: var(--shadow);
+  padding: 18px 32px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 16px;
+  transition: background-color var(--transition);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+
+.header-left h1 {
+  font-size: 1.6rem;
+  font-weight: 700;
+  color: var(--accent);
+}
+
+.name-wrapper {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 4px;
+}
+
+.display-name {
+  font-size: 1rem;
+  color: var(--text-secondary);
+  font-weight: 500;
+}
+
+.name-form {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 8px;
+  flex-wrap: wrap;
+}
+
+.name-form input {
+  padding: 7px 12px;
+  border: 1.5px solid var(--border);
+  border-radius: 8px;
+  background: var(--input-bg);
+  color: var(--text-primary);
+  font-size: 0.9rem;
+  outline: none;
+  width: 200px;
+  transition: border-color var(--transition);
+}
+
+.name-form input:focus {
+  border-color: var(--accent);
+}
+
+.header-right {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 4px;
+}
+
+.clock {
+  font-size: 2rem;
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+  color: var(--text-primary);
+  letter-spacing: 2px;
+}
+
+.date-display {
+  font-size: 0.9rem;
+  color: var(--text-secondary);
+}
+
+.btn-theme {
+  background: var(--accent-light);
+  color: var(--accent);
+  padding: 6px 14px;
+  font-size: 1.1rem;
+  border-radius: 20px;
+  margin-top: 4px;
+  transition: background-color var(--transition), color var(--transition);
+}
+
+.btn-theme:hover {
+  background: var(--accent);
+  color: #fff;
+}
+
+/* =============================================
+   MAIN GRID
+   ============================================= */
+.main-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  gap: 24px;
+  padding: 28px 32px;
+  flex: 1;
+  align-items: start;
+}
+
+/* =============================================
+   CARD
+   ============================================= */
+.card {
+  background-color: var(--bg-card);
+  border-radius: 16px;
+  box-shadow: var(--shadow);
+  padding: 24px;
+  transition: background-color var(--transition), box-shadow var(--transition);
+  border: 1px solid var(--border);
+}
+
+.card:hover {
+  box-shadow: var(--shadow-hover);
+}
+
+.card-title {
+  font-size: 1.15rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  margin-bottom: 18px;
+  padding-bottom: 10px;
+  border-bottom: 2px solid var(--accent-light);
+}
+
+/* =============================================
+   FOCUS TIMER
+   ============================================= */
+.timer-display {
+  text-align: center;
+  font-size: 4rem;
+  font-weight: 800;
+  font-variant-numeric: tabular-nums;
+  letter-spacing: 4px;
+  color: var(--accent);
+  background: var(--timer-bg);
+  border-radius: 16px;
+  padding: 24px;
+  margin-bottom: 20px;
+  transition: color var(--transition), background var(--transition);
+}
+
+/* Warna merah saat 5 menit terakhir */
+.timer-display.warning {
+  color: var(--danger);
+  background: rgba(239, 68, 68, 0.1);
+}
+
+.timer-controls {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.timer-hint {
+  text-align: center;
+  font-size: 0.82rem;
+  color: var(--text-muted);
+  margin-top: 14px;
+}
+
+/* =============================================
+   TO-DO LIST
+   ============================================= */
+.todo-form {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 4px;
+}
+
+.todo-form input {
+  flex: 1;
+  padding: 9px 14px;
+  border: 1.5px solid var(--border);
+  border-radius: 8px;
+  background: var(--input-bg);
+  color: var(--text-primary);
+  font-size: 0.9rem;
+  outline: none;
+  transition: border-color var(--transition);
+}
+
+.todo-form input:focus {
+  border-color: var(--accent);
+}
+
+.todo-filters {
+  display: flex;
+  gap: 6px;
+  margin: 14px 0 10px;
+}
+
+.filter-btn {
+  padding: 5px 14px;
+  font-size: 0.82rem;
+  border-radius: 20px;
+  background: var(--border);
+  color: var(--text-secondary);
+  transition: background-color var(--transition), color var(--transition);
+}
+
+.filter-btn.active {
+  background: var(--accent);
+  color: #fff;
+}
+
+.filter-btn:hover:not(.active) {
+  background: var(--accent-light);
+  color: var(--accent);
+}
+
+.todo-list {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  max-height: 340px;
+  overflow-y: auto;
+  padding-right: 4px;
+}
+
+/* Scrollbar kustom */
+.todo-list::-webkit-scrollbar {
+  width: 4px;
+}
+.todo-list::-webkit-scrollbar-track {
+  background: transparent;
+}
+.todo-list::-webkit-scrollbar-thumb {
+  background: var(--border);
+  border-radius: 4px;
+}
+
+/* Item tugas */
+.todo-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background: var(--input-bg);
+  border: 1.5px solid var(--border);
+  border-radius: 10px;
+  padding: 10px 12px;
+  transition: border-color var(--transition), background var(--transition), opacity 0.3s;
+  animation: fadeIn 0.2s ease;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(-6px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+.todo-item.done {
+  opacity: 0.65;
+}
+
+.todo-item.done .todo-text {
+  text-decoration: line-through;
+  color: var(--done-text);
+}
+
+.todo-checkbox {
+  width: 18px;
+  height: 18px;
+  accent-color: var(--success);
+  cursor: pointer;
+  flex-shrink: 0;
+}
+
+.todo-text {
+  flex: 1;
+  font-size: 0.92rem;
+  color: var(--text-primary);
+  word-break: break-word;
+}
+
+/* Input edit inline */
+.todo-edit-input {
+  flex: 1;
+  padding: 4px 8px;
+  border: 1.5px solid var(--accent);
+  border-radius: 6px;
+  background: var(--input-bg);
+  color: var(--text-primary);
+  font-size: 0.92rem;
+  outline: none;
+}
+
+.todo-actions {
+  display: flex;
+  gap: 4px;
+  flex-shrink: 0;
+}
+
+.btn-edit-todo,
+.btn-delete-todo,
+.btn-save-edit {
+  padding: 4px 8px;
+  font-size: 0.8rem;
+  border-radius: 6px;
+}
+
+.btn-edit-todo {
+  background: var(--accent-light);
+  color: var(--accent);
+}
+
+.btn-edit-todo:hover {
+  background: var(--accent);
+  color: #fff;
+}
+
+.btn-delete-todo {
+  background: rgba(239, 68, 68, 0.1);
+  color: var(--danger);
+}
+
+.btn-delete-todo:hover {
+  background: var(--danger);
+  color: #fff;
+}
+
+.btn-save-edit {
+  background: var(--success);
+  color: #fff;
+}
+
+.btn-save-edit:hover {
+  opacity: 0.85;
+}
+
+.todo-count {
+  margin-top: 12px;
+  font-size: 0.82rem;
+  color: var(--text-muted);
+  text-align: right;
+}
+
+/* =============================================
+   QUICK LINKS
+   ============================================= */
+.link-form {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  margin-bottom: 4px;
+}
+
+.link-form input {
+  flex: 1;
+  min-width: 120px;
+  padding: 9px 14px;
+  border: 1.5px solid var(--border);
+  border-radius: 8px;
+  background: var(--input-bg);
+  color: var(--text-primary);
+  font-size: 0.9rem;
+  outline: none;
+  transition: border-color var(--transition);
+}
+
+.link-form input:focus {
+  border-color: var(--accent);
+}
+
+.links-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 14px;
+}
+
+.link-card {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: var(--accent-light);
+  border: 1.5px solid var(--accent);
+  border-radius: 10px;
+  padding: 8px 12px;
+  transition: background var(--transition), transform 0.15s;
+  animation: fadeIn 0.2s ease;
+}
+
+.link-card:hover {
+  background: var(--accent);
+  transform: translateY(-2px);
+}
+
+.link-card:hover .link-name,
+.link-card:hover .btn-delete-link {
+  color: #fff;
+}
+
+.link-name {
+  font-size: 0.88rem;
+  font-weight: 600;
+  color: var(--accent);
+  text-decoration: none;
+  transition: color var(--transition);
+}
+
+.btn-delete-link {
+  background: transparent;
+  color: var(--accent);
+  font-size: 0.85rem;
+  padding: 2px 4px;
+  border-radius: 4px;
+  transition: color var(--transition);
+}
+
+/* =============================================
+   FOOTER
+   ============================================= */
+.footer {
+  text-align: center;
+  padding: 16px;
+  font-size: 0.8rem;
+  color: var(--text-muted);
+  border-top: 1px solid var(--border);
+  background: var(--bg-card);
+  transition: background-color var(--transition);
+}
+
+/* =============================================
+   RESPONSIVE — Layar kecil (HP)
+   ============================================= */
+@media (max-width: 600px) {
+  .header {
+    padding: 14px 16px;
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .header-right {
+    align-items: flex-start;
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 10px;
+  }
+
+  .clock {
+    font-size: 1.5rem;
+  }
+
+  .main-grid {
+    padding: 16px;
+    gap: 16px;
+    grid-template-columns: 1fr;
+  }
+
+  .timer-display {
+    font-size: 3rem;
+  }
+
+  .todo-form {
+    flex-direction: column;
+  }
+
+  .link-form {
+    flex-direction: column;
+  }
+}
